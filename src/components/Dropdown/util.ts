@@ -24,7 +24,7 @@ const createFormattedDataNode = (
         id,
         value,
         selected,
-        visible
+        visible,
     }
 }
 
@@ -32,8 +32,25 @@ const doesDataHasString = (data: Option): data is string => {
     return typeof data === 'string'
 }
 
-const doesDataHasObject = (
-    data: Option
-): data is { title: string } => {
+const doesDataHasObject = (data: Option): data is { title: string } => {
     return typeof data === 'object'
+}
+
+export const makeSubmissionData = (
+    data: Array<any>,
+    options: TFormattedData
+): Array<any> => {
+    return options
+        .filter((option) => option.selected)
+        .map((option) => data[option.id])
+}
+
+export const setDataVisibility = (
+    options: TFormattedData,
+    visible: boolean
+): TFormattedData => {
+    return options.map((option) => {
+        option.visible = visible
+        return option
+    })
 }

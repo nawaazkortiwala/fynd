@@ -1,10 +1,18 @@
-import { FunctionComponent, ReactElement, useState } from 'react'
+import { FunctionComponent, ReactElement, useEffect, useState } from 'react'
 import Body from './Body/Body'
 import Filter from './Filter/Filter'
-import { TDropDownProps, TFormattedData, TFormattedDataNode } from './types'
-import { getFormattedData } from './util'
+import DropdownContext from './store'
+import {
+    TCollapseOp,
+    TDropDownProps,
+    TFormattedData,
+    TOptionsOp,
+} from './types'
+import { getFormattedData, makeSubmissionData, setDataVisibility } from './util'
+import View from './View/View'
 
 const Dropdown: FunctionComponent<TDropDownProps> = ({
+    label,
     data,
     multiSelect,
     onSelect,
@@ -17,44 +25,56 @@ const Dropdown: FunctionComponent<TDropDownProps> = ({
      *  1. Filter
      *  2. Body
      */
+    const [collapsed, setCollapsed] = useState(false)
     const [options, setOptions] = useState<TFormattedData>(
         getFormattedData(data)
     )
 
-    const handleFilterTextChange = (filter_text: string): void => {
-        const filtered_options = options.map((option) => {
-            if (!option.value.match(new RegExp(filter_text, 'ig'))) {
-                option.visible = false
-            } else option.visible = true
-
-            return option
-        })
-        setOptions(filtered_options)
+    const collapseOp: TCollapseOp = {
+        get() {
+            return collapsed
+        },
+        set(collapse: boolean) {
+            setCollapsed(collapse)
+        },
     }
 
-    const optionsOps = {
+    const optionsOp: TOptionsOp = {
         get() {
             return options
         },
-        add(option: TFormattedDataNode) {
-            setOptions([...options, option])
-        },
-        remove(option: TFormattedDataNode) {
-            setOptions(options.filter((_option) => _option.id !== option.id))
+        set(_options: TFormattedData) {
+            setOptions(_options)
         },
         submit() {
-            return options.filter((option) => {
-                if (option.selected) return data[option.id]    
-                return false
-            })
+            const submission_data = makeSubmissionData(data, options)
+            onSelect(submission_data)
+
+            collapseOp.set(true)
+
+            const _options = setDataVisibility(options, true)
+            setOptions(_options)
         },
     }
 
+    useEffect(() => {
+        console.log(
+            options
+                .filter((option) => option.visible)
+                .map((option) => option.value)
+                .join(' ')
+        )
+    }, [options])
+
     return (
-        <>
-            <Filter onChange={handleFilterTextChange} />
-            <Body options={optionsOps} multiSelect={multiSelect} />
-        </>
+        <DropdownContext.Provider
+            value={{ collapsed: collapseOp, options: optionsOp, multiSelect }}
+        >
+            <View label={label}>
+                <Filter />
+                <Body />
+            </View>
+        </DropdownContext.Provider>
     )
 }
 
