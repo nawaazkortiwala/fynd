@@ -3,6 +3,7 @@ import DropdownContext from 'src/store/Dropdown.context'
 import { TFormattedDataNode } from '../../Dropdown.types'
 import Option from './Option/Option'
 import { updateSingleSelectedOption, updateMultiSelectedOption } from './Options.utils'
+import './Options.scss'
 
 const Options: FunctionComponent = () => {
     const { options, multiSelect } = useContext(DropdownContext)
@@ -36,7 +37,7 @@ const Options: FunctionComponent = () => {
         )
     })
 
-    return <>{render_options}</>
+    return <div className="option-container">{render_options}</div>
 }
 
 export default Options

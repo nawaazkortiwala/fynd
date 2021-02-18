@@ -1,0 +1,25 @@
+@import '../../../../common/styles';
+
+.dropdown-row {
+    position: relative;
+    border: $border;
+    box-sizing: border-box;
+    height: $row-height;
+    background-color: white;
+
+    .button {
+        border: unset;
+        width: 90%;
+        height: 100%;
+        background-color: unset;
+        text-align: left;
+        padding: $padding;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

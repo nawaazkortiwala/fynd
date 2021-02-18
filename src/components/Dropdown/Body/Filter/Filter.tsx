@@ -1,5 +1,6 @@
 import { ChangeEvent, FunctionComponent, useContext } from 'react'
 import DropdownContext from 'src/store/Dropdown.context'
+import './Filter.scss'
 
 const Filter: FunctionComponent = () => {
     const { options } = useContext(DropdownContext)
@@ -20,9 +21,9 @@ const Filter: FunctionComponent = () => {
     }
     // Add a cross to clear text
     return (
-        <>
-            <input type="text" onChange={handleOnChange} />
-        </>
+        <div className="dropdown-filter">
+            <input type="text" className="input" onChange={handleOnChange} />
+        </div>
     )
 }
 

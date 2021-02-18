@@ -20,10 +20,10 @@ const Controls: FunctionComponent = () => {
     if (!multiSelect) return <></>
 
     return (
-        <>
-            <button onClick={onClearClick}>Clear</button>
-            <button onClick={onSubmitClick}>Submit</button>
-        </>
+        <div className="control-container">
+            <button className="control-button" onClick={onClearClick}>Clear</button>
+            <button className="control-button control-submit" onClick={onSubmitClick}>Submit</button>
+        </div>
     )
 }
 

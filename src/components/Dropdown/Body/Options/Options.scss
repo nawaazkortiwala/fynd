@@ -1,0 +1,49 @@
+@import '../../../../common/styles';
+
+.option-container {
+    max-height: 160px;
+    overflow-y: auto;
+
+    .option {
+        padding: $padding;
+    }
+}
+.control-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 30px;
+    height: 60px;
+    padding: $padding;
+    box-sizing: border-box;
+
+    .control-button {
+        border: none;
+        background-color: unset;
+        font-weight: bold;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .control-submit {
+        color: $submit-button-color;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(211, 208, 208);
+    padding: 0 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(182, 179, 179);
+}

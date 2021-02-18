@@ -15,8 +15,8 @@ const Option: FunctionComponent<TOptionProps> = ({ option, selectable, onClick }
 
     return (
         <Row onClick={onOptionClick}>
-            <span>{checkbox}</span>
-            {option.value}
+            {checkbox}
+            <span>{option.value}</span>
         </Row>
     )
 }

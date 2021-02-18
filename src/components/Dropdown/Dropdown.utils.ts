@@ -22,10 +22,14 @@ const createFormattedDataNode = (
 ): TFormattedDataNode => {
     return {
         id,
-        value,
+        value: capitalize(value),
         selected,
         visible,
     }
+}
+
+const capitalize = (value: string): string => {
+    return value[0].toUpperCase() + value.slice(1,)
 }
 
 const doesDataHasString = (data: Option): data is string => {
@@ -58,12 +62,10 @@ export const setDataVisibility = (
 export function collapseDropdown() {
     const dropdown_el: HTMLDivElement = arguments[0]
     const collapsed: TCollapseOp = arguments[1]
-    const options: TOptionsOp = arguments[2]
     const multiSelect: boolean = arguments[3]
     const e = arguments[4]
 
     if (!multiSelect && !dropdown_el.contains(e.target)) {
         collapsed.set(true)
-        options.submit()
     }
 }

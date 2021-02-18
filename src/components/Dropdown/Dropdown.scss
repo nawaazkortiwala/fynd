@@ -1,0 +1,11 @@
+@import '../../common/styles';
+
+.dropdown {
+    width: $row-width;
+
+    .container {
+        position: relative;
+        height: auto;
+        width: 100%;
+    }
+}

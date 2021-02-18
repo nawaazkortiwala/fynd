@@ -21,6 +21,7 @@ import {
     setDataVisibility,
 } from './Dropdown.utils'
 import Preview from './Preview/Preview'
+import './Dropdown.scss'
 
 const Dropdown: FunctionComponent<TDropDownProps> = ({
     label,
@@ -88,26 +89,16 @@ const Dropdown: FunctionComponent<TDropDownProps> = ({
             document.removeEventListener('click', boundedCollapseDropdown)
         }
     })
-
-    useEffect(() => {
-        console.log(
-            options
-                .filter((option) => option.visible)
-                .map((option) => option.value)
-                .join(' ')
-        )
-    }, [options])
-
+    
     return (
         <DropdownContext.Provider
             value={{ collapsed: collapseOp, options: optionsOp, multiSelect }}
         >
-            <div
-                ref={dropdown_ref}
-                style={{ position: 'relative', height: 'auto', width: 'auto' }}
-            >
-                <Preview label={label} />
-                <Body />
+            <div ref={dropdown_ref} className="dropdown">
+                <div className="container">
+                    <Preview label={label} />
+                    <Body />
+                </div>
             </div>
         </DropdownContext.Provider>
     )
