@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { checkboxes } from 'src/config/assets'
-import { TCheckboxProps } from './type'
+import { TCheckboxProps } from './Checkbox.types'
 
 const Checkbox: FunctionComponent<TCheckboxProps> = ({ state }) => {
     const attr = (() => {

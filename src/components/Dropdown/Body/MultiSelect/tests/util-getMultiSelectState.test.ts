@@ -1,6 +1,6 @@
-import { arrayOfObject, arrayOfString } from '../../../../../static/data'
-import { getFormattedData } from '../../../util'
-import { getMultiSelectState } from '../util'
+import { arrayOfObject, arrayOfString } from 'src/static/data'
+import { getFormattedData } from '../../../Dropdown.utils'
+import { getMultiSelectState } from '../MultiSelect.utils'
 
 const formatted_data_strings = getFormattedData(arrayOfString)
 const formatted_data_objects = getFormattedData(arrayOfObject)

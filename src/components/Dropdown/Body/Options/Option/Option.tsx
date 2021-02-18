@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react'
 import Checkbox from '../../Checkbox/Checkbox'
 import Row from '../../Row/Row'
-import { TOptionProps } from './types'
-import { getCheckboxState } from './util'
+import { TOptionProps } from './Option.types'
+import { getCheckboxState } from './Option.utils'
 
 const Option: FunctionComponent<TOptionProps> = ({ option, selectable, onClick }) => {
 

@@ -1,5 +1,5 @@
 import { ChangeEvent, FunctionComponent, useContext } from 'react'
-import DropdownContext from '../store'
+import DropdownContext from 'src/store/Dropdown.context'
 
 const Filter: FunctionComponent = () => {
     const { options } = useContext(DropdownContext)

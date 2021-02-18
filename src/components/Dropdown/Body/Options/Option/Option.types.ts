@@ -1,4 +1,4 @@
-import { TFormattedDataNode, TOptionsOp } from "src/components/Dropdown/types";
+import { TFormattedDataNode } from "src/components/Dropdown/Dropdown.types";
 
 export type TOptionProps = {
     option: TFormattedDataNode

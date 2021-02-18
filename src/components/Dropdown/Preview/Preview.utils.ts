@@ -1,4 +1,4 @@
-import { TFormattedData } from '../types'
+import { TFormattedData } from '../Dropdown.types'
 
 export const getPreviewText = (label: string, options: TFormattedData) => {
     if (options.length) {

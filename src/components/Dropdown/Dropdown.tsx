@@ -1,15 +1,26 @@
-import { FunctionComponent, ReactElement, useEffect, useState } from 'react'
+import {
+    FunctionComponent,
+    ReactElement,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react'
 import Body from './Body/Body'
-import Filter from './Filter/Filter'
-import DropdownContext from './store'
+import DropdownContext from '../../store/Dropdown.context'
 import {
     TCollapseOp,
     TDropDownProps,
     TFormattedData,
     TOptionsOp,
-} from './types'
-import { getFormattedData, makeSubmissionData, setDataVisibility } from './util'
-import View from './View/View'
+} from './Dropdown.types'
+import {
+    collapseDropdown,
+    getFormattedData,
+    makeSubmissionData,
+    setDataVisibility,
+} from './Dropdown.utils'
+import Preview from './Preview/Preview'
 
 const Dropdown: FunctionComponent<TDropDownProps> = ({
     label,
@@ -25,10 +36,11 @@ const Dropdown: FunctionComponent<TDropDownProps> = ({
      *  1. Filter
      *  2. Body
      */
-    const [collapsed, setCollapsed] = useState(false)
+    const [collapsed, setCollapsed] = useState(true)
     const [options, setOptions] = useState<TFormattedData>(
         getFormattedData(data)
     )
+    const dropdown_ref = useRef<HTMLDivElement | null>(null)
 
     const collapseOp: TCollapseOp = {
         get() {
@@ -39,23 +51,43 @@ const Dropdown: FunctionComponent<TDropDownProps> = ({
         },
     }
 
-    const optionsOp: TOptionsOp = {
-        get() {
-            return options
-        },
-        set(_options: TFormattedData) {
-            setOptions(_options)
-        },
-        submit() {
-            const submission_data = makeSubmissionData(data, options)
-            onSelect(submission_data)
+    const optionsOp: TOptionsOp = useMemo(() => {
+        return {
+            get() {
+                return options
+            },
+            set(_options: TFormattedData) {
+                setOptions(_options)
+            },
+            clear() {
+                const _options = setDataVisibility(options, true)
+                setOptions(_options)
+            },
+            submit() {
+                const submission_data = makeSubmissionData(data, options)
+                onSelect(submission_data)
 
-            collapseOp.set(true)
+                setCollapsed(true)
 
-            const _options = setDataVisibility(options, true)
-            setOptions(_options)
-        },
-    }
+                this.clear()
+            },
+        }
+    }, [data, onSelect, options])
+
+    useEffect(() => {
+        const boundedCollapseDropdown = collapseDropdown.bind(
+            null,
+            dropdown_ref.current,
+            collapseOp,
+            optionsOp,
+            multiSelect
+        )
+        document.addEventListener('click', boundedCollapseDropdown)
+
+        return () => {
+            document.removeEventListener('click', boundedCollapseDropdown)
+        }
+    })
 
     useEffect(() => {
         console.log(
@@ -70,10 +102,13 @@ const Dropdown: FunctionComponent<TDropDownProps> = ({
         <DropdownContext.Provider
             value={{ collapsed: collapseOp, options: optionsOp, multiSelect }}
         >
-            <View label={label}>
-                <Filter />
+            <div
+                ref={dropdown_ref}
+                style={{ position: 'relative', height: 'auto', width: 'auto' }}
+            >
+                <Preview label={label} />
                 <Body />
-            </View>
+            </div>
         </DropdownContext.Provider>
     )
 }

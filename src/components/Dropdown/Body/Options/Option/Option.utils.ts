@@ -1,4 +1,4 @@
-import { TMultiSelectState } from "../../MultiSelect/types"
+import { TMultiSelectState } from "../../MultiSelect/MultiSelect.types"
 
 export const getCheckboxState = (selected: boolean): TMultiSelectState => {
     if (selected) return 2

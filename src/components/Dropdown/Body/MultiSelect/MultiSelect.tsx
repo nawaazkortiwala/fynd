@@ -1,9 +1,8 @@
-import { FunctionComponent, useCallback, useContext, useState } from 'react'
-import DropdownContext from '../../store'
+import { FunctionComponent, useContext } from 'react'
+import DropdownContext from 'src/store/Dropdown.context'
 import Checkbox from '../Checkbox/Checkbox'
 import Row from '../Row/Row'
-import { TMultiSelectState } from './types'
-import { getMultiSelectState } from './util'
+import { getMultiSelectState } from './MultiSelect.utils'
 
 const MultiSelect: FunctionComponent = () => {
     const { options, multiSelect } = useContext(DropdownContext)
@@ -14,15 +13,12 @@ const MultiSelect: FunctionComponent = () => {
 
     const onMultiSelectClick = () => {
         let selection: boolean = false
-        let next_state: TMultiSelectState = 0
         
         if (state === 0 || state === 1) {
-            next_state = 2
             selection = true
         } else selection = false
         
         const modified_options = options.get().map((option) => {
-            next_state = 0
             option.selected = selection
             return option
         })

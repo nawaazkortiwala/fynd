@@ -1,6 +1,6 @@
-import { Option } from '../../../../common/types'
-import { TFormattedData } from '../../types'
-import { getFormattedData } from '../../util'
+import { Option } from 'src/common/types'
+import { TFormattedData } from '../../Dropdown.types'
+import { getFormattedData } from '../../Dropdown.utils'
 
 test('should return TFormattedData with arrayOfString', () => {
     const input = ['red', 'green']

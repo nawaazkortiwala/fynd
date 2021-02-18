@@ -1,8 +1,8 @@
 import { FunctionComponent, useContext } from 'react'
-import DropdownContext from '../../store'
-import { TFormattedData, TFormattedDataNode } from '../../types'
+import DropdownContext from 'src/store/Dropdown.context'
+import { TFormattedDataNode } from '../../Dropdown.types'
 import Option from './Option/Option'
-import { updateSingleSelectedOption, updateMultiSelectedOption } from './util'
+import { updateSingleSelectedOption, updateMultiSelectedOption } from './Options.utils'
 
 const Options: FunctionComponent = () => {
     const { options, multiSelect } = useContext(DropdownContext)

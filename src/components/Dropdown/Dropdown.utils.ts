@@ -1,5 +1,5 @@
-import { Option } from '../../common/types'
-import { TFormattedData, TFormattedDataNode } from './types'
+import { Option } from 'src/common/types'
+import { TCollapseOp, TFormattedData, TFormattedDataNode, TOptionsOp } from './Dropdown.types'
 
 export const getFormattedData = (data: Option[]): TFormattedData => {
     const formatted_data: TFormattedData = []
@@ -53,4 +53,17 @@ export const setDataVisibility = (
         option.visible = visible
         return option
     })
+}
+
+export function collapseDropdown() {
+    const dropdown_el: HTMLDivElement = arguments[0]
+    const collapsed: TCollapseOp = arguments[1]
+    const options: TOptionsOp = arguments[2]
+    const multiSelect: boolean = arguments[3]
+    const e = arguments[4]
+
+    if (!multiSelect && !dropdown_el.contains(e.target)) {
+        collapsed.set(true)
+        options.submit()
+    }
 }

@@ -1,5 +1,5 @@
-import { TFormattedData } from "../../types";
-import { TMultiSelectState } from "./types";
+import { TFormattedData } from "../../Dropdown.types";
+import { TMultiSelectState } from "./MultiSelect.types";
 
 export const getMultiSelectState = (options: TFormattedData): TMultiSelectState => {
     const selected_options = options.reduce<number>((selected_count, option) => {

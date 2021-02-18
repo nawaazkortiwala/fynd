@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { TCollapseOp, TFormattedData, TOptionsOp } from './types'
+import { TCollapseOp, TFormattedData, TOptionsOp } from '../components/Dropdown/Dropdown.types'
 
 type DropDownContextProps = {
     collapsed: TCollapseOp
@@ -22,6 +22,7 @@ const DropdownContext = createContext<DropDownContextProps>({
             return options
         },
         set(_options: TFormattedData) {},
+        clear() {},
         submit() {
             return
         },

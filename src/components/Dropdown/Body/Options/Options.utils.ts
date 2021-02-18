@@ -1,4 +1,4 @@
-import { TFormattedData, TFormattedDataNode } from '../../types'
+import { TFormattedData, TFormattedDataNode } from '../../Dropdown.types'
 
 export const updateMultiSelectedOption = (
     options: TFormattedData,

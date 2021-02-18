@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext } from 'react'
-import DropdownContext from '../../store'
+import DropdownContext from 'src/store/Dropdown.context'
 
 const Controls: FunctionComponent = () => {
     const { options, multiSelect } = useContext(DropdownContext)

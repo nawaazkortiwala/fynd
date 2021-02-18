@@ -9,5 +9,6 @@ module.exports = {
     },
     rules: {
         'react-hooks/rules-of-hooks': 'warn',
+        'no-unused-vars': 'error',
     },
 }
