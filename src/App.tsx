@@ -21,7 +21,7 @@ const App = () => {
                     <div className="custom-dropdown">
                         <div className="properties">
                             <p>
-                                <b>Input:</b> Array of string
+                                <b>Input:</b> Array of strings
                             </p>
                             <p>
                                 <b>Multi-select:</b> Off
@@ -37,7 +37,7 @@ const App = () => {
                     <div className="custom-dropdown">
                         <div className="properties">
                             <p>
-                                <b>Input:</b> Array of string
+                                <b>Input:</b> Array of strings
                             </p>
                             <p>
                                 <b>Multi-select:</b> On
