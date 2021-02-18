@@ -5,6 +5,7 @@ import { TPreviewProps } from './Preview.types'
 import { getPreviewText } from './Preview.utils'
 import './Preview.scss'
 
+// Shows the initial and selected values in the dropdown being in the collapsed state
 const Preview: FunctionComponent<TPreviewProps> = ({ children, label }) => {
     const { collapsed, options } = useContext(DropdownContext)
 

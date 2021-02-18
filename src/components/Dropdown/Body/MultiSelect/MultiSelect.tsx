@@ -2,8 +2,20 @@ import { FunctionComponent, useContext } from 'react'
 import DropdownContext from 'src/store/Dropdown.context'
 import Checkbox from '../Checkbox/Checkbox'
 import Row from '../Row/Row'
-import { getMultiSelectState } from './MultiSelect.utils'
+import {
+    getCurrentSelection,
+    getMultiSelectState,
+    markOptionsSelected,
+} from './MultiSelect.utils'
 
+/**
+ * Selects and deselects options based on current state
+ *
+ * About the State:
+ *      0 - No options selected
+ *      1 - Some options selected
+ *      2 - All options selected
+ */
 const MultiSelect: FunctionComponent = () => {
     const { options, multiSelect } = useContext(DropdownContext)
 
@@ -12,17 +24,10 @@ const MultiSelect: FunctionComponent = () => {
     const state = getMultiSelectState(options.get())
 
     const onMultiSelectClick = () => {
-        let selection: boolean = false
-        
-        if (state === 0 || state === 1) {
-            selection = true
-        } else selection = false
-        
-        const modified_options = options.get().map((option) => {
-            option.selected = selection
-            return option
-        })
-        
+        let selection: boolean = getCurrentSelection(state)
+
+        const modified_options = markOptionsSelected(options.get(), selection)
+
         options.set(modified_options)
     }
 

@@ -5,6 +5,7 @@ import Option from './Option/Option'
 import { updateSingleSelectedOption, updateMultiSelectedOption } from './Options.utils'
 import './Options.scss'
 
+// Render all the options of the dropdown. Logic of event-handlers.
 const Options: FunctionComponent = () => {
     const { options, multiSelect } = useContext(DropdownContext)
 

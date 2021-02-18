@@ -6,6 +6,7 @@ import Options from './Options/Options'
 import DropdownContext from 'src/store/Dropdown.context'
 import './Body.scss'
 
+// Contains the expanded dropdown
 const Body: FunctionComponent = () => {
     const { collapsed } = useContext(DropdownContext)
     if (collapsed.get()) return <></>

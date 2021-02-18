@@ -1,6 +1,7 @@
 import { ChangeEvent, FunctionComponent, useContext } from 'react'
 import DropdownContext from 'src/store/Dropdown.context'
 import './Filter.scss'
+import { getFilteredOptions } from './Filter.utils'
 
 const Filter: FunctionComponent = () => {
     const { options } = useContext(DropdownContext)
@@ -8,14 +9,10 @@ const Filter: FunctionComponent = () => {
     const handleOnChange = ({
         currentTarget,
     }: ChangeEvent<HTMLInputElement>) => {
-        const filter_text = currentTarget.value
-        const filtered_options = options.get().map((option) => {
-            if (!option.value.match(new RegExp(filter_text, 'ig'))) {
-                option.visible = false
-            } else option.visible = true
-
-            return option
-        })
+        const filtered_options = getFilteredOptions(
+            options.get(),
+            currentTarget.value
+        )
 
         options.set(filtered_options)
     }

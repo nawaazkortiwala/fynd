@@ -1,6 +1,11 @@
 import { Option } from 'src/common/types'
-import { TCollapseOp, TFormattedData, TFormattedDataNode, TOptionsOp } from './Dropdown.types'
+import {
+    TCollapseOp,
+    TFormattedData,
+    TFormattedDataNode,
+} from './Dropdown.types'
 
+// Transform the data from the Dropdown implementing component to an usable format.
 export const getFormattedData = (data: Option[]): TFormattedData => {
     const formatted_data: TFormattedData = []
 
@@ -20,6 +25,13 @@ const createFormattedDataNode = (
     selected = false,
     visible = true
 ): TFormattedDataNode => {
+    /**
+     *  id - the index values from the original data array
+     *  value - the text value. Either from the array index directly or from the "title" property
+     *  selected - maintains the options selection attribute
+     *  visible - used during filtering options
+     */
+
     return {
         id,
         value: capitalize(value),
@@ -29,7 +41,7 @@ const createFormattedDataNode = (
 }
 
 const capitalize = (value: string): string => {
-    return value[0].toUpperCase() + value.slice(1,)
+    return value[0].toUpperCase() + value.slice(1)
 }
 
 const doesDataHasString = (data: Option): data is string => {
@@ -40,6 +52,7 @@ const doesDataHasObject = (data: Option): data is { title: string } => {
     return typeof data === 'object'
 }
 
+// Returns the selected data from the selected options
 export const makeSubmissionData = (
     data: Array<any>,
     options: TFormattedData
@@ -49,6 +62,7 @@ export const makeSubmissionData = (
         .map((option) => data[option.id])
 }
 
+// Sets the all options visibility based on the argument passed
 export const setDataVisibility = (
     options: TFormattedData,
     visible: boolean
@@ -59,6 +73,7 @@ export const setDataVisibility = (
     })
 }
 
+// Collapsed the dropdown on click outside the dropdown
 export function collapseDropdown() {
     const dropdown_el: HTMLDivElement = arguments[0]
     const collapsed: TCollapseOp = arguments[1]
